@@ -1,0 +1,167 @@
+<html style="">
+<head>
+	<meta charset="UTF-8">
+	<title>W-SRAT</title>
+	<link rel="shortcut icon" href="https://wsrat.wujingchi.com/limit/img/you.ico" />
+<!--
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+-->
+	<!-- 载入layui CSS -->
+	<link rel="stylesheet" href="https://wsrat.wujingchi.com/limit/core/layui/css/layui.css"  media="all">
+	<link rel="stylesheet" href="https://wsrat.wujingchi.com/limit/css/waveletShrinkageEstimationTool.css"  media="all">
+</head>
+
+<body id="body" style="position:relative;">
+	<ul class="layui-nav" lay-filter="">
+		<li class="layui-nav-item layui-this"><a href="https://wsrat.wujingchi.com/index.php/welcome\index\waveletShrinkageEstimationTool">W-SRAT</a></li>
+		
+		<li class="layui-nav-item"><a href="https://daubewet.wujingchi.com">Daubechies-WET</a></li>
+		
+	</ul>
+
+
+	<!-- 登录页 -->
+	<div class="login_shade_div">
+		<!-- 登录内容 -->
+		<div class="layadmin-user-login layadmin-user-display-show" id="LAY-user-login" style="display: none;">
+			<div class="layadmin-user-login-main">
+				<div class="layadmin-user-login-box layadmin-user-login-header">
+					
+					<h2 style="font-size: 25px;">W-SRAT2</h2>
+					<!--<p>Author：Wu JingChi</p>-->
+				</div>
+				<div class="layadmin-user-login-box layadmin-user-login-body layui-form" lay-filter="formTest">
+					<div class="layui-form-item" style="margin-bottom: 0px;">
+						<label class="layui-form-label">Dataset :</label>
+						<button type="button" class="layui-btn" id="upload">
+							<i class="layui-icon">&#xe67c;</i>Upload
+						</button>
+						<label id="fileName" class="layui-form-label" style="float:right;text-align:left;width:177px;color:#999;">
+						<!--
+						DS2.txt
+						<i style="margin-left: 5px;" class="layui-icon layui-icon-loading layui-anim layui-anim-rotate layui-anim-loop"></i>
+						<i style="margin-left: 5px;color: #5FB878;" class="layui-icon layui-icon-auz"></i>
+						<i style="margin-left: 5px;color: #FF5722;" class="layui-icon layui-icon-tips"></i>
+						-->
+						</label>
+					</div>
+					<div class="layui-form-item" style="margin-bottom: 0px;margin-left: 170px;">
+						<a download="SampleDataSet.txt" style="font-size: 12px;color: #999;" href="https://wsrat.wujingchi.com/sample.txt">SampleDataSet.txt</a>
+					</div>
+					<div class="layui-form-item">
+						<div class="layui-form-item">
+							<label class="layui-form-label">Data Type :</label>
+							<div class="layui-input-block">
+								<input type="radio" lay-filter="count" name="DataType" value="count" title="Software-fault count data" checked/>
+								<input type="radio" lay-filter="cumulative" name="DataType" value="cumulative" title="Cumulative software-fault count data"/>
+							</div>
+						</div>
+					</div>
+
+
+					<div class="layui-tab" lay-filter="WSE-tab">
+						<ul class="layui-tab-title">
+							<li class="layui-this">DT-WSE</li>
+							<li>NDT-WSE</li>
+						</ul>
+						<div class="layui-tab-content">
+							<div class="layui-tab-item layui-show">
+								<div class="layui-form-item">
+									<label class="layui-form-label">Data Transformation :</label>
+									<div class="layui-input-block">
+										<input type="radio" name="dataTransform" value="Anscombe1" title="A1" checked/>
+										<input type="radio" name="dataTransform" value="Anscombe2" title="A2"/>
+										<input type="radio" name="dataTransform" value="Bartlett1" title="B1"/>
+										<input type="radio" name="dataTransform" value="Bartlett2" title="B2"/>
+										<input type="radio" name="dataTransform" value="Fisz1" title="F1"/>
+										<input type="radio" name="dataTransform" value="Fisz2" title="F2"/>
+									</div>
+								</div>
+								<div class="layui-form-item">
+									<label class="layui-form-label">Thresholding Rule :</label>
+									<div class="layui-input-block">
+										<input type="radio" name="thresholdRule" value="soft" title="Soft Rule" checked/>
+										<input type="radio" name="thresholdRule" value="hard" title="Hard Rule"/>
+									</div>
+								</div>
+								<div class="layui-form-item">
+									<label class="layui-form-label">Threshold Value :</label>
+									<div class="layui-input-block">
+										<input type="radio" name="thresholdMethod" value="ut" title="Universal" checked/>
+										<input type="radio" name="thresholdMethod" value="lut" title="Level-dependent Universal" />
+										<input type="radio" name="thresholdMethod" value="lht" title="Leave-out-half Cross-Validation"/>
+									</div>
+								</div>
+							</div>
+							<div class="layui-tab-item">
+								<div class="layui-form-item">
+									<label class="layui-form-label">Estimation Method :</label>
+									<div class="layui-input-block">
+										<input type="radio" name="EstimationMethod" value="Haar" title="H" checked/>
+										<input type="radio" name="EstimationMethod" value="TranslationInvariant" title="TI"/>
+									</div>
+								</div>
+								<div class="layui-form-item">
+									<label class="layui-form-label">Threshold Rule :</label>
+									<div class="layui-input-block">
+										<input type="radio" name="thresholdRule2" value="soft" title="Soft Rule" checked/>
+										<input type="radio" name="thresholdRule2" value="hard" title="Hard Rule"/>
+									</div>
+								</div>
+								<div class="layui-form-item">
+									<label class="layui-form-label">Threshold Value :</label>
+									<div class="layui-input-block">
+										<input type="radio" name="thresholdMethod2" value="ldt" title="Level-dependent Threshold" checked/>
+										<input type="radio" name="thresholdMethod2" value="lht" title="Leave-out-half Cross-Validation"/>
+									</div>
+								</div>
+								
+							</div>
+						</div>
+					</div>
+					
+
+					
+					<!--
+					<div class="layui-form-item">
+						<label class="layui-form-label">全組み合わせ</label>
+						<div class="layui-input-block">
+							<input type="checkbox" name="mode" lay-skin="switch">
+						</div>
+					</div>
+					-->
+					<div class="layui-form-item">
+						<div class="layui-input-block" id="res" style="margin-left: 155px;">
+						<button id="Estimate" class="layui-btn" lay-submit lay-filter="Estimate" >Estimate</button>
+						<button id="Predict" class="layui-btn" lay-submit lay-filter="Predict" >Predict</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+<!-- 载入layui JS -->
+<script src="https://wsrat.wujingchi.com/limit/core/layui/layui.js"></script>
+<!-- 载入jquery -->
+<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<!-- 载入jquery cookie -->
+<script src="https://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<!-- 载入md5插件 -->
+<script src="https://wsrat.wujingchi.com/limit/core/md5.js"></script>
+<!-- 载入LimitControl控制模块 -->
+<script src="https://wsrat.wujingchi.com/limit/core/LimitControl.js"></script>
+<!-- 载入页面脚本 -->
+<script src="https://wsrat.wujingchi.com/limit/js/waveletShrinkageEstimationTool.js"></script>
+<!-- 模块组入口 -->
+<script>
+	//载入layer模块
+	layui.use('layer', function(){});
+    layui.use('element', function(){});
+	//设置网站域名
+	LimitControl.setHostName("https://wsrat.wujingchi.com/index.php/");
+	//设置Limit框架目录路径
+	LimitControl.setStaticHost("https://wsrat.wujingchi.com/");
+</script>
+</html>
