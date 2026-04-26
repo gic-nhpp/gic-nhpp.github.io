@@ -47,40 +47,23 @@ function index_tab()
 			}
 			function estimateConfirmPage() 
 			{
-				
-			
-				var WSEtype = $.cookie('WSEtype')
-				if(WSEtype == 1)
-				{
-					DataType = data.field.DataType
-					dataTransform = data.field.EstimationMethod
-					thresholdRule = data.field.thresholdRule2
-					thresholdValue = data.field.thresholdMethod2
-				}
-				if(WSEtype == 0)
-				{
-					
-					DataType = data.field.DataType
-					dataTransform = data.field.dataTransform
-					thresholdRule = data.field.thresholdRule
-					thresholdValue = data.field.thresholdMethod
-				}
-				if(WSEtype == 1 || WSEtype == 0)
-				{
-					fileName = $.cookie('fileName')
-					realFileName = $.cookie($.cookie('fileName'))
-					//iframe层-父子操作
-					layer.open({
-						title: 'Confirm',
-						skin: 'layui-layer-molv',
-						type: 2,
-						area: ['650px', '600px'],
-						fixed: true,
-						maxmin: false,
-						scrollbar: false,
-						content: LimitControl.hostName() + 'welcome/confirm/estimationConfirm/'+WSEtype+'/'+DataType+'/'+dataTransform+'/'+thresholdRule+'/'+thresholdValue+'/'+fileName+'/'+realFileName
-					});
-				}
+				//dataType = data.field.dataType
+				estMethod = data.field.estMethod
+				modelName = data.field.modelName
+				obserPoint = data.field.obserPoint
+				fileName = $.cookie('fileName')
+				realFileName = $.cookie($.cookie('fileName'))
+				//iframe层-父子操作
+				layer.open({
+					title: 'Confirm',
+					skin: 'layui-layer-molv',
+					type: 2,
+					area: ['650px', '600px'],
+					fixed: true,
+					maxmin: false,
+					scrollbar: false,
+					content: LimitControl.hostName() + 'welcome/confirm/estimationConfirm/'+obserPoint+'/'+estMethod+'/'+modelName+'/'+fileName+'/'+realFileName
+				});
 			}
 			return false;
 		});
@@ -197,6 +180,20 @@ function index_tab()
 
 			}
 		});
+
+		form.on('radio(obserPoint2)', function(data){
+			$("#obserPointMsg").html("Regard the first 20% of the whole data as early testing phases, and use the remaining 80% data for verification.");
+		});
+		form.on('radio(obserPoint5)', function(data){
+			$("#obserPointMsg").html("Regard the first 50% of the whole data as middle testing phases, and use the remaining 50% data for verification.");
+		});
+		form.on('radio(obserPoint8)', function(data){
+			$("#obserPointMsg").html("Regard the first 80% of the whole data as late testing phases, and use the remaining 20% data for verification.");
+		});
+		form.on('radio(obserPoint10)', function(data){
+			$("#obserPointMsg").html("Use the 100% of the whole data for trainning.");
+		});
+
 		form.on('radio(cumulative)', function(data){
 			console.log($.cookie('radioStatus'))
 			oldRadioStatus = $.cookie('radioStatus')
@@ -252,7 +249,7 @@ function index_tab()
 	  //执行实例
 	  var uploadInst = upload.render({
 	    elem: '#upload' //绑定元素
-	    ,exts:'txt'
+	    ,exts:'xlsx'
 	    ,auto: true //选择文件后自动上传
 	    ,url: LimitControl.hostName() + 'Wavelet/upload' //上传接口
 	    ,multiple: false
@@ -275,13 +272,15 @@ function index_tab()
 	    	$.cookie($.cookie("fileName"),res.filename)
 	    	//console.log($.cookie("fileName"));
 	    	//console.log($.cookie($.cookie("fileName")));
-	    	var dataType = $("input[name='DataType']:checked").val()
-	    	console.log(dataType)
+	    	//var dataType = $("input[name='DataType']:checked").val()
+	    	var isCumData = "cumulative"
+	    	//var dataType = $("input[name='dataType']:checked").val()
+	    	//console.log(dataType)
 	    	var url = LimitControl.hostName() + 'Wavelet/check';
 			var data_arr =
 			{
 				fileName : res.filename,
-				dataType : dataType
+				dataType : isCumData
 			}
 			function success_check(jsonStr) 
 			{
@@ -289,7 +288,9 @@ function index_tab()
 				if(data.status == 'True')
 				{
 					$("#fileName").html($.cookie("fileName")+'<i style="margin-left: 5px;color: #5FB878;" class="layui-icon layui-icon-auz"></i>')
-					layer.alert('Success: The total number of software fault is '+data.totalSum+' and the total term of dataset is '+data.totalTerm+'.',{btn: 'OK',title: 'Message'});
+					//if dataType == "time"{}
+					layer.alert('Success: This dataset has a total testing time of '+data.totalSum+' and contains '+data.totalTerm+' detected software faults.',{btn: 'OK',title: 'Message'});
+					//if dataType == "group"{}
 					$.cookie('fileStatus',1)
 				}
 				if(data.status == 'False')

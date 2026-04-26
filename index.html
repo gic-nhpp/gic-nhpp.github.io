@@ -1,9 +1,9 @@
 <html style="">
 <head>
 	<meta charset="UTF-8">
-	<title>W-SRAT</title>
-	<link rel="shortcut icon" href="https://gic-nhpp.github.io/limit/img/you.ico" />
-<!--
+	<title>GIC for NHPP</title>
+	<!--<link rel="shortcut icon" href="https://gic-nhpp.github.io/limit/img/you.ico" />
+
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 -->
 	<!-- 载入layui CSS -->
@@ -12,9 +12,6 @@
 </head>
 
 <body id="body" style="position:relative;">
-	<ul class="layui-nav" lay-filter="">
-		<li class="layui-nav-item layui-this"><a href="https://gic-nhpp.github.io/index.php/welcome\index\waveletShrinkageEstimationTool">GIC in NHPP</a></li>
-	</ul>
 
 
 	<!-- 登录页 -->
@@ -24,7 +21,7 @@
 			<div class="layadmin-user-login-main">
 				<div class="layadmin-user-login-box layadmin-user-login-header">
 					
-					<h2 style="font-size: 25px;">W-SRAT2</h2>
+					<h2 style="font-size: 25px;">GIC for NHPP</h2>
 					<!--<p>Author：Wu JingChi</p>-->
 				</div>
 				<div class="layadmin-user-login-box layadmin-user-login-body layui-form" lay-filter="formTest">
@@ -33,104 +30,70 @@
 						<button type="button" class="layui-btn" id="upload">
 							<i class="layui-icon">&#xe67c;</i>Upload
 						</button>
-						<label id="fileName" class="layui-form-label" style="float:right;text-align:left;width:177px;color:#999;">
-						<!--
-						DS2.txt
-						<i style="margin-left: 5px;" class="layui-icon layui-icon-loading layui-anim layui-anim-rotate layui-anim-loop"></i>
-						<i style="margin-left: 5px;color: #5FB878;" class="layui-icon layui-icon-auz"></i>
-						<i style="margin-left: 5px;color: #FF5722;" class="layui-icon layui-icon-tips"></i>
-						-->
+						<label id="fileName" class="layui-form-label" style="float:right;text-align:left;width:177px;color:#999; padding-right: 35px;">
 						</label>
 					</div>
-					<div class="layui-form-item" style="margin-bottom: 0px;margin-left: 170px;">
-						<a download="SampleDataSet.txt" style="font-size: 12px;color: #999;" href="https://gic-nhpp.github.io/sample.txt">SampleDataSet.txt</a>
+					<div class="layui-form-item" style="margin-left: 170px;">
+						<p style="font-size: 12px; color: #999;">Click <a download="DS1toDS10.zip" style="color: #1E90FF;" href="https://gic-nhpp.github.io/DS1toDS10.zip">here</a> to download the DS1~DS10 datasets used in our paper.</p>
+						<p style="font-size: 12px; color: #999;">You may then upload any one of these datasets, such as “DS1.xlsx”, to our tool.</p>
 					</div>
+
+					<!--
 					<div class="layui-form-item">
 						<div class="layui-form-item">
 							<label class="layui-form-label">Data Type :</label>
 							<div class="layui-input-block">
-								<input type="radio" lay-filter="count" name="DataType" value="count" title="Software-fault count data" checked/>
-								<input type="radio" lay-filter="cumulative" name="DataType" value="cumulative" title="Cumulative software-fault count data"/>
+								<input type="radio" lay-filter="dataType" name="dataType" value="time" title="Time-domain Data" checked/>
+								<input type="radio" lay-filter="dataType" name="dataType" value="group" title="Grouped Data"/>
 							</div>
-						</div>
-					</div>
-
-
-					<div class="layui-tab" lay-filter="WSE-tab">
-						<ul class="layui-tab-title">
-							<li class="layui-this">DT-WSE</li>
-							<li>NDT-WSE</li>
-						</ul>
-						<div class="layui-tab-content">
-							<div class="layui-tab-item layui-show">
-								<div class="layui-form-item">
-									<label class="layui-form-label">Data Transformation :</label>
-									<div class="layui-input-block">
-										<input type="radio" name="dataTransform" value="Anscombe1" title="A1" checked/>
-										<input type="radio" name="dataTransform" value="Anscombe2" title="A2"/>
-										<input type="radio" name="dataTransform" value="Bartlett1" title="B1"/>
-										<input type="radio" name="dataTransform" value="Bartlett2" title="B2"/>
-										<input type="radio" name="dataTransform" value="Fisz1" title="F1"/>
-										<input type="radio" name="dataTransform" value="Fisz2" title="F2"/>
-									</div>
-								</div>
-								<div class="layui-form-item">
-									<label class="layui-form-label">Thresholding Rule :</label>
-									<div class="layui-input-block">
-										<input type="radio" name="thresholdRule" value="soft" title="Soft Rule" checked/>
-										<input type="radio" name="thresholdRule" value="hard" title="Hard Rule"/>
-									</div>
-								</div>
-								<div class="layui-form-item">
-									<label class="layui-form-label">Threshold Value :</label>
-									<div class="layui-input-block">
-										<input type="radio" name="thresholdMethod" value="ut" title="Universal" checked/>
-										<input type="radio" name="thresholdMethod" value="lut" title="Level-dependent Universal" />
-										<input type="radio" name="thresholdMethod" value="lht" title="Leave-out-half Cross-Validation"/>
-									</div>
-								</div>
-							</div>
-							<div class="layui-tab-item">
-								<div class="layui-form-item">
-									<label class="layui-form-label">Estimation Method :</label>
-									<div class="layui-input-block">
-										<input type="radio" name="EstimationMethod" value="Haar" title="H" checked/>
-										<input type="radio" name="EstimationMethod" value="TranslationInvariant" title="TI"/>
-									</div>
-								</div>
-								<div class="layui-form-item">
-									<label class="layui-form-label">Threshold Rule :</label>
-									<div class="layui-input-block">
-										<input type="radio" name="thresholdRule2" value="soft" title="Soft Rule" checked/>
-										<input type="radio" name="thresholdRule2" value="hard" title="Hard Rule"/>
-									</div>
-								</div>
-								<div class="layui-form-item">
-									<label class="layui-form-label">Threshold Value :</label>
-									<div class="layui-input-block">
-										<input type="radio" name="thresholdMethod2" value="ldt" title="Level-dependent Threshold" checked/>
-										<input type="radio" name="thresholdMethod2" value="lht" title="Leave-out-half Cross-Validation"/>
-									</div>
-								</div>
-								
-							</div>
-						</div>
-					</div>
-					
-
-					
-					<!--
-					<div class="layui-form-item">
-						<label class="layui-form-label">全組み合わせ</label>
-						<div class="layui-input-block">
-							<input type="checkbox" name="mode" lay-skin="switch">
 						</div>
 					</div>
 					-->
+
+					<div class="layui-form-item">
+						<div class="layui-form-item" style="margin-bottom: 0px;">
+							<label class="layui-form-label">Observation Point :</label>
+							<div class="layui-input-block">
+								<input type="radio" lay-filter="obserPoint2" name="obserPoint" value="2" title="20%" checked/>
+								<input type="radio" lay-filter="obserPoint5" name="obserPoint" value="5" title="50%"/>
+								<input type="radio" lay-filter="obserPoint8" name="obserPoint" value="8" title="80%"/>
+								<input type="radio" lay-filter="obserPoint10" name="obserPoint" value="10" title="100%"/>
+							</div>
+						</div>
+						<div class="layui-form-item" style="margin-bottom: 0px;margin-left: 170px;">
+							<p id="obserPointMsg" style="font-size: 12px;color: #999;">
+							Regard the first 20% of the whole data as early testing phases, and use the remaining 80% data for verification.
+							</p>
+						</div>
+
+					</div>
+
+					<div class="layui-form-item">
+						<label class="layui-form-label">Estimation Method :</label>
+						<div class="layui-input-block">
+							<input type="radio" name="estMethod" value="OLS" title="OLS (Ordinary Least Squares)" checked/>
+							<input type="radio" name="estMethod" value="RLS" title="RLS (Root Least Squares)"/>
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">Model Name :</label>
+						<div class="layui-input-block">
+							<input type="radio" name="modelName" value="Exp" title="Exp" checked/>
+							<input type="radio" name="modelName" value="Gamma" title="Gamma"/>
+							<input type="radio" name="modelName" value="Pareto" title="Pareto"/>
+							<input type="radio" name="modelName" value="TruncNormal" title="TruncNormal"/>
+							<input type="radio" name="modelName" value="TruncLogist" title="TruncLogist"/>
+							<input type="radio" name="modelName" value="LogLogist" title="LogLogist"/>
+							<input type="radio" name="modelName" value="TruncEVMax" title="TruncEVMax"/>
+							<input type="radio" name="modelName" value="LogEVMax" title="LogEVMax"/>
+							<input type="radio" name="modelName" value="TruncEVMin" title="TruncEVMin"/>
+							<input type="radio" name="modelName" value="LogEVMin" title="LogEVMin"/>
+						</div>
+					</div>
+
 					<div class="layui-form-item">
 						<div class="layui-input-block" id="res" style="margin-left: 155px;">
 						<button id="Estimate" class="layui-btn" lay-submit lay-filter="Estimate" >Estimate</button>
-						<button id="Predict" class="layui-btn" lay-submit lay-filter="Predict" >Predict</button>
 						</div>
 					</div>
 				</div>
@@ -157,7 +120,7 @@
 	layui.use('layer', function(){});
     layui.use('element', function(){});
 	//设置网站域名
-	LimitControl.setHostName("https://wsrat.wujingchi.com/index.php/");
+	LimitControl.setHostName("https://gic.61jieyou.com/index.php/");
 	//设置Limit框架目录路径
 	LimitControl.setStaticHost("https://gic-nhpp.github.io/");
 </script>
