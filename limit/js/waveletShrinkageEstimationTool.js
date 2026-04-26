@@ -182,13 +182,13 @@ function index_tab()
 		});
 
 		form.on('radio(obserPoint2)', function(data){
-			$("#obserPointMsg").html("Regard the first 20% of the whole data as early testing phases, and use the remaining 80% data for verification.");
+			$("#obserPointMsg").html("Regard the first 20% of the whole data as early testing phase, and use the remaining 80% data for verification.");
 		});
 		form.on('radio(obserPoint5)', function(data){
-			$("#obserPointMsg").html("Regard the first 50% of the whole data as middle testing phases, and use the remaining 50% data for verification.");
+			$("#obserPointMsg").html("Regard the first 50% of the whole data as middle testing phase, and use the remaining 50% data for verification.");
 		});
 		form.on('radio(obserPoint8)', function(data){
-			$("#obserPointMsg").html("Regard the first 80% of the whole data as late testing phases, and use the remaining 20% data for verification.");
+			$("#obserPointMsg").html("Regard the first 80% of the whole data as late testing phase, and use the remaining 20% data for verification.");
 		});
 		form.on('radio(obserPoint10)', function(data){
 			$("#obserPointMsg").html("Use the 100% of the whole data for trainning.");
